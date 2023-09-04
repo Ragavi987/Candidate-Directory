@@ -22,14 +22,14 @@ class CandidatedirectorySerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(_('Invalid primary contact number'))
 
             if qs.count() > 0:
-                raise serializers.ValidationError(_('Primary contact number number already exist'))
+                raise serializers.ValidationError(_('Primary contact number already exist'))
 
         if attrs.get('contact_no_alternate') is not None:
             alternate_no = attrs.get('contact_no_alternate')
             qs_ = Candidatedirectory.objects.filter(Q(contact_no_alternate__iexact=alternate_no) | Q(contact_no_alternate__icontains=alternate_no))
 
             if qs_.count() > 0:
-                raise serializers.ValidationError(_('Alternate contact number number already exist'))
+                raise serializers.ValidationError(_('Alternate contact number already exist'))
             if len(str(alternate_no)) > 10 or len(str(alternate_no)) < 10 or str(alternate_no).isdigit==False:
                 raise serializers.ValidationError(_('Invalid alternate contact number'))
 
